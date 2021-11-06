@@ -10,6 +10,6 @@ package proyectoanalisis;
  */
 public class parrayou {
     public static void main(String[] args) {
-        System.out.println("proyectoanalisis.parrayou.main()");
+        System.out.println("you you you");
     }
 }

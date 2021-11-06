@@ -1,2 +1,3 @@
 # proyectoAnalisis
- Santiago Parra Rodriguez
+ Santiago Steven Parra Rodriguez
+ Carlos Andres Sanchez Giraldo

@@ -8,6 +8,7 @@ package modelo;
  *
  * @author Santiago Parra
  */
+//zona
 public class Direccion {
     private int id;
     private String principal;

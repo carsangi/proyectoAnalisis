@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *
  * @author Santiago Parra
  */
+//lugarResidencia, Idiomas, biografia, foto.
 public class Anfitrion {
     private String correo;
     private String nombre;

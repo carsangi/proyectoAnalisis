@@ -9,5 +9,8 @@ package modelo;
  * @author Santiago Parra
  */
 public class Opinion {
-    
+    private int id;
+    private double calificacion;
+    private String cqr;
+    private Huesped huesped;
 }

@@ -10,6 +10,7 @@ import java.util.ArrayList;
  *
  * @author Santiago Parra
  */
+//cantPersonas, accesibilidad, cantHabitaciones, cantCamas, cantBaños, fotos, opiniones, tipoHospedaje
 public class Alojamiento {
     private int id;
     private int tipo;

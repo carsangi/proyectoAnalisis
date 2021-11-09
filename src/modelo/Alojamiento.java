@@ -10,12 +10,18 @@ import java.util.ArrayList;
  *
  * @author Santiago Parra
  */
-//cantPersonas, accesibilidad, cantHabitaciones, cantCamas, cantBaños, fotos, opiniones, tipoHospedaje
+//cantPersonas-, accesibilidad-, cantHabitaciones-, cantCamas-, cantBaños-, fotos, opiniones-, tipoHospedaje
 public class Alojamiento {
     private int id;
     private int tipo;
     private String descripcion;
     private Direccion direccion;
+    private int cantidadPersonas;
+    private int cantidadHabitaciones;
+    private int cantidadCamas;
+    private int cantidadBanios;
+    private String accessibilidad;
+    private ArrayList<Opinion> listaOpiniones;
     private ArrayList<Servicio> listaServicios;
     private String baño;
     private ArrayList<Comodidad> listaComodidades;

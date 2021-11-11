@@ -20,6 +20,7 @@ public class Alojamiento {
     private int cantidadHabitaciones;
     private int cantidadCamas;
     private int cantidadBanios;
+    //private String fotos;
     private String accessibilidad;
     private ArrayList<Opinion> listaOpiniones;
     private ArrayList<Servicio> listaServicios;
@@ -29,12 +30,22 @@ public class Alojamiento {
     private ArrayList<Aspecto> listaAspectos; 
     private double precio;
     private ArrayList<Regla> listaReglas;
+    private TipoHospedaje tipoHospedaje;
 
-    public Alojamiento(int id, int tipo, String descripcion, Direccion direccion, ArrayList<Servicio> listaServicios, String baño, ArrayList<Comodidad> listaComodidades, String titulo, ArrayList<Aspecto> listaAspectos, double precio, ArrayList<Regla> listaReglas) {
+    public Alojamiento() {
+    }
+
+    public Alojamiento(int id, int tipo, String descripcion, Direccion direccion, int cantidadPersonas, int cantidadHabitaciones, int cantidadCamas, int cantidadBanios, String accessibilidad, ArrayList<Opinion> listaOpiniones, ArrayList<Servicio> listaServicios, String baño, ArrayList<Comodidad> listaComodidades, String titulo, ArrayList<Aspecto> listaAspectos, double precio, ArrayList<Regla> listaReglas, TipoHospedaje tipoHospedaje) {
         this.id = id;
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.direccion = direccion;
+        this.cantidadPersonas = cantidadPersonas;
+        this.cantidadHabitaciones = cantidadHabitaciones;
+        this.cantidadCamas = cantidadCamas;
+        this.cantidadBanios = cantidadBanios;
+        this.accessibilidad = accessibilidad;
+        this.listaOpiniones = listaOpiniones;
         this.listaServicios = listaServicios;
         this.baño = baño;
         this.listaComodidades = listaComodidades;
@@ -42,11 +53,7 @@ public class Alojamiento {
         this.listaAspectos = listaAspectos;
         this.precio = precio;
         this.listaReglas = listaReglas;
-    }
-
-    
-
-    public Alojamiento() {
+        this.tipoHospedaje = tipoHospedaje;
     }
 
     public Alojamiento(int id) {
@@ -83,6 +90,54 @@ public class Alojamiento {
 
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
+    }
+
+    public int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public void setCantidadPersonas(int cantidadPersonas) {
+        this.cantidadPersonas = cantidadPersonas;
+    }
+
+    public int getCantidadHabitaciones() {
+        return cantidadHabitaciones;
+    }
+
+    public void setCantidadHabitaciones(int cantidadHabitaciones) {
+        this.cantidadHabitaciones = cantidadHabitaciones;
+    }
+
+    public int getCantidadCamas() {
+        return cantidadCamas;
+    }
+
+    public void setCantidadCamas(int cantidadCamas) {
+        this.cantidadCamas = cantidadCamas;
+    }
+
+    public int getCantidadBanios() {
+        return cantidadBanios;
+    }
+
+    public void setCantidadBanios(int cantidadBanios) {
+        this.cantidadBanios = cantidadBanios;
+    }
+
+    public String getAccessibilidad() {
+        return accessibilidad;
+    }
+
+    public void setAccessibilidad(String accessibilidad) {
+        this.accessibilidad = accessibilidad;
+    }
+
+    public ArrayList<Opinion> getListaOpiniones() {
+        return listaOpiniones;
+    }
+
+    public void setListaOpiniones(ArrayList<Opinion> listaOpiniones) {
+        this.listaOpiniones = listaOpiniones;
     }
 
     public ArrayList<Servicio> getListaServicios() {
@@ -140,8 +195,14 @@ public class Alojamiento {
     public void setListaReglas(ArrayList<Regla> listaReglas) {
         this.listaReglas = listaReglas;
     }
-    
-    
+
+    public TipoHospedaje getTipoHospedaje() {
+        return tipoHospedaje;
+    }
+
+    public void setTipoHospedaje(TipoHospedaje tipoHospedaje) {
+        this.tipoHospedaje = tipoHospedaje;
+    }
     
     
 }

@@ -4,6 +4,11 @@
  */
 package vista;
 
+import java.awt.Font;
+import java.awt.font.TextAttribute;
+import java.util.Map;
+import modelo.Anfitrion;
+
 /**
  *
  * @author Santiago Parra
@@ -13,8 +18,11 @@ public class frmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form frmPrincipal
      */
+    public static String correo = "";
     public frmPrincipal() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -26,11 +34,23 @@ public class frmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lblHazteAnfitrion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Hazte Anfitrion");
+        lblHazteAnfitrion.setText("Hazte Anfitrion");
+        lblHazteAnfitrion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblHazteAnfitrion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblHazteAnfitrionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblHazteAnfitrionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblHazteAnfitrionMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -38,19 +58,41 @@ public class frmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(612, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHazteAnfitrion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblHazteAnfitrion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(598, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void lblHazteAnfitrionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHazteAnfitrionMouseClicked
+     frmRegistrarAnfitrion1 vista = new frmRegistrarAnfitrion1();
+     vista.setVisible(true);
+     this.dispose();
+     
+    }//GEN-LAST:event_lblHazteAnfitrionMouseClicked
+
+    private void lblHazteAnfitrionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHazteAnfitrionMouseEntered
+         Font font = lblHazteAnfitrion.getFont();
+
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        lblHazteAnfitrion.setFont(font.deriveFont(attributes));
+    }//GEN-LAST:event_lblHazteAnfitrionMouseEntered
+
+    private void lblHazteAnfitrionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblHazteAnfitrionMouseExited
+        Font font = lblHazteAnfitrion.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, -1);
+        lblHazteAnfitrion.setFont(font.deriveFont(attributes));
+    }//GEN-LAST:event_lblHazteAnfitrionMouseExited
 
     /**
      * @param args the command line arguments
@@ -88,6 +130,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblHazteAnfitrion;
     // End of variables declaration//GEN-END:variables
 }

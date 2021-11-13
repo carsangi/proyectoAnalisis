@@ -4,7 +4,16 @@
  */
 package modelo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,11 +29,11 @@ public class Anfitrion {
     private String lugarResidencia;
     private String idiomas;
     private String biografia;
-    //private String foto;
+    private String foto;
     private String password;
-    private ArrayList<Alojamiento> listaAlojamientos;
+    
 
-    public Anfitrion(String correo, String nombre, String apellido, String telefono, String fechaNacimiento, String lugarResidencia, String idiomas, String biografia, String password, ArrayList<Alojamiento> listaAlojamientos) {
+    public Anfitrion(String correo, String nombre, String apellido, String telefono, String fechaNacimiento, String lugarResidencia, String idiomas, String biografia,String foto, String password) {
         this.correo = correo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,8 +42,9 @@ public class Anfitrion {
         this.lugarResidencia = lugarResidencia;
         this.idiomas = idiomas;
         this.biografia = biografia;
+        this.foto = foto;
         this.password = password;
-        this.listaAlojamientos = listaAlojamientos;
+        
     }
 
     public Anfitrion() {
@@ -108,6 +118,15 @@ public class Anfitrion {
         this.biografia = biografia;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
+
     public String getPassword() {
         return password;
     }
@@ -116,12 +135,65 @@ public class Anfitrion {
         this.password = password;
     }
 
-    public ArrayList<Alojamiento> getListaAlojamientos() {
-        return listaAlojamientos;
-    }
+    public void guardar() throws FileNotFoundException {
+  
+        try {
+            conexion con = new conexion();
+            Connection cnx = (Connection) con.conectar();
 
-    public void setListaAlojamientos(ArrayList<Alojamiento> listaAlojamientos) {
-        this.listaAlojamientos = listaAlojamientos;
+            PreparedStatement pst = (PreparedStatement) cnx.prepareStatement("INSERT INTO anfitriones VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+            pst.setString(1, this.correo);
+            pst.setString(2, this.nombre);
+            pst.setString(3, this.apellido);
+            pst.setString(4, this.telefono);
+            pst.setString(5, this.fechaNacimiento);
+            pst.setString(6, this.lugarResidencia);
+            pst.setString(7, this.idiomas);
+            pst.setString(8, this.biografia);
+            FileInputStream archivoFoto = new FileInputStream(this.foto);
+            pst.setBinaryStream(9, archivoFoto);
+            
+            pst.setString(10,this.foto);
+            
+            pst.setString(11, this.password);
+            
+
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Anfitrion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public Anfitrion buscar() {
+
+        Anfitrion anfi = new Anfitrion();
+        try {
+
+            conexion con = new conexion();
+            Connection cnx = (Connection) con.conectar();
+            Statement st = cnx.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM anfitriones WHERE correo = " + "'"+this.correo+"'");
+
+            if (rs.next()) {
+                anfi.setCorreo(rs.getString("correo"));
+                anfi.setNombre(rs.getString("nombre"));
+                anfi.setApellido(rs.getString("apellido"));
+                anfi.setTelefono(rs.getString("telefono"));
+                anfi.setFechaNacimiento(rs.getString("fechaNacimiento"));
+                anfi.setLugarResidencia(rs.getString("lugarResidencia"));
+                anfi.setIdiomas(rs.getString("idiomas"));
+                anfi.setBiografia(rs.getString("biografia"));
+                anfi.setFoto(rs.getString("ruta_foto"));
+                anfi.setPassword(rs.getString("password"));
+              
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Anfitrion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return anfi;
     }
 
     

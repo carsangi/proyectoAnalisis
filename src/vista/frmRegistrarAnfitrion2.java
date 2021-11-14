@@ -271,6 +271,7 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
         try {
             anfitrion.guardar();
             
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(frmRegistrarAnfitrion2.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -356,6 +357,8 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

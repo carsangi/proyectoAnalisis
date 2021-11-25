@@ -80,7 +80,7 @@ public class frmPrueba extends javax.swing.JFrame {
       Anfitrion anfiAux = new Anfitrion(correo);
       
       Anfitrion anfi = anfiAux.buscar();
-        System.out.println(anfi.getNombre());
+       
       Image foto =  getToolkit().getImage(anfi.getFoto());
             Icon icono = new ImageIcon(foto.getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
 

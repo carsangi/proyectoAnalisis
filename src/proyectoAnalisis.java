@@ -1,4 +1,9 @@
 
+import java.io.FileNotFoundException;
+import modelo.Anfitrion;
+import modelo.Servicio;
+import modelo.TipoAlojamiento;
+import modelo.TipoHospedaje;
 import vista.frmPrincipal;
 
 /*
@@ -16,7 +21,8 @@ public class proyectoAnalisis {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
+        
         frmPrincipal vista= new frmPrincipal();
         vista.setVisible(true);
     }

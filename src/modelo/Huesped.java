@@ -4,7 +4,14 @@
  */
 package modelo;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,15 +20,15 @@ import java.util.ArrayList;
 /*lugarResidencia, biografia, foto, identificacion o pasaporte, estrato, nivel de estudios, estado civil, genero.
 No. Tarjeta Credito*/
 public class Huesped {
-    private String correo;
-    private String nombre;
-    private String apellido;
-    private String telefono;
-    private String fechaNacimiento;
-    private String lugarResidencia;
-    private String biografia;
-    //private String fotoooooooooooooooooooooooto;
-    private String identificacion;
+    private String correo;//
+    private String nombre;//
+    private String apellido;//
+    private String telefono;//
+    private String fechaNacimiento;//
+    private String lugarResidencia;//   
+    private String biografia;//
+    private String foto;//
+    private String identificacion;//
     private int estrato;
     private String nivelEstudio;
     private String estadoCivil;
@@ -30,9 +37,9 @@ public class Huesped {
     
     
     
-    private String password;
+    private String password;//
 
-    public Huesped(String correo, String nombre, String apellido, String telefono, String fechaNacimiento, String lugarResidencia, String biografia, String identificacion, int estrato, String nivelEstudio, String estadoCivil, String genero, String NoTarjetaCredito, String password) {
+    public Huesped(String correo, String nombre, String apellido, String telefono, String fechaNacimiento, String lugarResidencia, String biografia, String foto, String identificacion, int estrato, String nivelEstudio, String estadoCivil, String genero, String NoTarjetaCredito, String password) {
         this.correo = correo;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -40,6 +47,7 @@ public class Huesped {
         this.fechaNacimiento = fechaNacimiento;
         this.lugarResidencia = lugarResidencia;
         this.biografia = biografia;
+        this.foto = foto;
         this.identificacion = identificacion;
         this.estrato = estrato;
         this.nivelEstudio = nivelEstudio;
@@ -48,6 +56,8 @@ public class Huesped {
         this.NoTarjetaCredito = NoTarjetaCredito;
         this.password = password;
     }
+
+    
 
     public Huesped() {
     }
@@ -95,6 +105,15 @@ public class Huesped {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+    
 
     public String getLugarResidencia() {
         return lugarResidencia;
@@ -167,6 +186,38 @@ public class Huesped {
     public void setPassword(String password) {
         this.password = password;
     }
-   
+   public void guardar() throws FileNotFoundException {
+  
+        try {
+            conexion con = new conexion();
+            Connection cnx = (Connection) con.conectar();
+
+            PreparedStatement pst = (PreparedStatement) cnx.prepareStatement("INSERT INTO huespedes VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            pst.setString(1, this.correo);
+            pst.setString(2, this.nombre);
+            pst.setString(3, this.apellido);
+            pst.setString(4, this.telefono);
+            pst.setString(5, this.fechaNacimiento);
+            pst.setString(6, this.lugarResidencia);
+            pst.setString(7, this.biografia);
+            pst.setString(8, this.foto);
+            
+            pst.setString(9, this.identificacion);
+            
+            pst.setInt(10,this.estrato);
+            
+            pst.setString(11, this.nivelEstudio);
+            pst.setString(12, this.estadoCivil);
+            pst.setString(13, this.genero);
+            pst.setString(14, this.NoTarjetaCredito);
+            
+
+            pst.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Anfitrion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
     
 }

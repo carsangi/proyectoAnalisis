@@ -3,15 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmPrueba.java</file>
             <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmRegistrarAnfitrion2.java</file>
-            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/modelo/TipoAlojamiento.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmAdmin.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmReserva1.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmRegistrarHuesped1.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmLogin.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmDatos.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmRegistrarHuesped3.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/proyectoAnalisis.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/modelo/Huesped.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/modelo/Direccion.java</file>
             <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/modelo/Anfitrion.java</file>
-            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmRegistrarAnfitrion1.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/modelo/Reserva.java</file>
             <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmPrincipal.java</file>
-            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmRegistrarAlojamiento1.java</file>
             <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/modelo/Alojamiento.java</file>
             <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/modelo/conexion.java</file>
+            <file>file:/C:/Users/Santiago%20Parra/Documents/GitHub/proyectoAnalisis/src/vista/frmRegistrarHuesped2.java</file>
         </group>
     </open-files>
 </project-private>

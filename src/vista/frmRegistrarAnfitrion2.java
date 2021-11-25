@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Icon;
@@ -59,6 +60,7 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
         btnContinuar = new javax.swing.JButton();
         panel1 = new javax.swing.JPanel();
         txtFoto = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtContra = new javax.swing.JTextField();
         lblFoto = new javax.swing.JLabel();
@@ -87,21 +89,31 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
 
         panel1.setForeground(new java.awt.Color(255, 0, 0));
 
+        jLabel7.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel7.setText("Registrar Anfitrion");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+            .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(110, 110, 110))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(122, 122, 122))))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(txtFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel7)
+                .addGap(19, 19, 19))
         );
 
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
@@ -258,7 +270,7 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addGap(33, 33, 33)
                 .addComponent(btnContinuar)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
@@ -270,9 +282,13 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
         
         try {
             anfitrion.guardar();
-            
+            frmRegistrarAlojamiento1 vista = new frmRegistrarAlojamiento1();
+            vista.setVisible(true);
+            this.dispose();
             
         } catch (FileNotFoundException ex) {
+            Logger.getLogger(frmRegistrarAnfitrion2.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(frmRegistrarAnfitrion2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
@@ -317,7 +333,12 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdiomasActionPerformed
 
     private void txtBiografiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBiografiaKeyTyped
-        // TODO add your handling code here:
+       char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            String cad = (""+c).toUpperCase();
+            c=cad.charAt(0);
+            evt.setKeyChar(c);
+        }
     }//GEN-LAST:event_txtBiografiaKeyTyped
 
     private void txtBiografiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBiografiaActionPerformed
@@ -400,6 +421,7 @@ public class frmRegistrarAnfitrion2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblFoto;
     private javax.swing.JPanel panel1;

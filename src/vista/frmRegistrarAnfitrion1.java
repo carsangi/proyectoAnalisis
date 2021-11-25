@@ -64,6 +64,7 @@ public class frmRegistrarAnfitrion1 extends javax.swing.JFrame {
         txtApellido = new javax.swing.JTextField();
         btnContinuar = new javax.swing.JButton();
         panel1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
@@ -131,15 +132,24 @@ public class frmRegistrarAnfitrion1 extends javax.swing.JFrame {
 
         panel1.setForeground(new java.awt.Color(255, 0, 0));
 
+        jLabel5.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        jLabel5.setText("Registrar Anfitrion");
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(jLabel5)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(33, 33, 33))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -214,7 +224,7 @@ public class frmRegistrarAnfitrion1 extends javax.swing.JFrame {
         if (Character.isLowerCase(c)) {
             String cad = ("" + c).toUpperCase();
             c = cad.charAt(0);
-            evt.setKeyChar(c);
+            evt.setKeyChar(c); 
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
@@ -286,6 +296,7 @@ public class frmRegistrarAnfitrion1 extends javax.swing.JFrame {
         anfi.setApellido(txtApellido.getText());
         anfi.setCorreo(txtCorreo.getText());
         anfi.setFechaNacimiento(fecha);
+        frmPrincipal.correo = txtCorreo.getText();
         frmRegistrarAnfitrion2 vista = new frmRegistrarAnfitrion2();
         vista.setVisible(true);
         this.dispose();
@@ -335,6 +346,7 @@ public class frmRegistrarAnfitrion1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panel1;
     private javax.swing.JTextField txtApellido;

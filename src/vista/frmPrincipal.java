@@ -4,11 +4,21 @@
  */
 package vista;
 
+import com.placeholder.PlaceHolder;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import modelo.Alojamiento;
 import modelo.Anfitrion;
+import modelo.Direccion;
+import modelo.TipoAlojamiento;
 
 /**
  *
@@ -20,11 +30,56 @@ public class frmPrincipal extends javax.swing.JFrame {
      * Creates new form frmPrincipal
      */
     public static String correo = "";
+    Alojamiento alojamiento = new Alojamiento();
     public frmPrincipal() {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        this.setResizable(false);
-        this.getContentPane().setBackground(Color.white);
+        try {
+            initComponents();
+            TipoAlojamiento tipo = new TipoAlojamiento();
+            ResultSet tipoA = tipo.get();
+            while(tipoA.next()){
+                cbTipoIAlojamiento.addItem(tipoA.getString(2));
+            }
+            Direccion direc = new Direccion();
+            ResultSet rs = direc.get();
+            while(rs.next()){
+                
+                cbCiudad.addItem(rs.getString(1));
+            }
+            
+            
+            PlaceHolder holder = new PlaceHolder(txtDesde, "Desde");
+            holder = new PlaceHolder(txtHasta, "Hasta");
+            
+            
+            Font fuente = new Font("Comic Sans MS", 1, 12);
+            txtDesde.setFont(fuente);
+            txtHasta.setFont(fuente);
+            tablaAlojamientos.setModel(alojamiento.listarElementos());
+            this.setLocationRelativeTo(null);
+            this.setResizable(false);
+            this.getContentPane().setBackground(Color.white);
+            pn1.setBackground(Color.red);
+            if (correo.equalsIgnoreCase("admin")) {
+                lblBienvenido.setText("ADMINISTRADOR");
+                lblIniciarSesion.setText("CERRAR SESION");
+                lblGestionarAdmin.setText("Gestionar");
+                lblGestionarAdmin.setCursor(new Cursor(HAND_CURSOR));
+            } else {                
+                if (correo.equals("")) {
+                    
+                } else {
+                    Anfitrion anfi = new Anfitrion(correo);
+                    Anfitrion anfitrion = anfi.buscar();
+                    lblBienvenido.setText(anfitrion.getNombre().toUpperCase());
+                    lblIniciarSesion.setText("CERRAR SESION");
+                    lblGestionarAdmin.setText("Publicar Inmueble");
+                    lblGestionarAdmin.setCursor(new Cursor(HAND_CURSOR));
+                    
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(frmPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -36,10 +91,28 @@ public class frmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pn1 = new javax.swing.JPanel();
         lblHazteAnfitrion = new javax.swing.JLabel();
+        lblIniciarSesion = new javax.swing.JLabel();
+        lblGestionarAdmin = new javax.swing.JLabel();
+        lblBienvenido = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaAlojamientos = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        cbCiudad = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        cbTipoIAlojamiento = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtHasta = new javax.swing.JTextField();
+        txtDesde = new javax.swing.JTextField();
+        btnVerTodos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblHazteAnfitrion.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblHazteAnfitrion.setForeground(new java.awt.Color(255, 255, 255));
         lblHazteAnfitrion.setText("Hazte Anfitrion");
         lblHazteAnfitrion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         lblHazteAnfitrion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -54,21 +127,229 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        lblIniciarSesion.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblIniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        lblIniciarSesion.setText("Iniciar Sesión");
+        lblIniciarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblIniciarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblIniciarSesionMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblIniciarSesionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblIniciarSesionMouseExited(evt);
+            }
+        });
+
+        lblGestionarAdmin.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        lblGestionarAdmin.setForeground(new java.awt.Color(255, 255, 255));
+        lblGestionarAdmin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblGestionarAdmin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblGestionarAdminMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblGestionarAdminMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblGestionarAdminMouseExited(evt);
+            }
+        });
+
+        lblBienvenido.setFont(new java.awt.Font("Comic Sans MS", 1, 24)); // NOI18N
+        lblBienvenido.setForeground(new java.awt.Color(255, 255, 255));
+        lblBienvenido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblBienvenido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBienvenidoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBienvenidoMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pn1Layout = new javax.swing.GroupLayout(pn1);
+        pn1.setLayout(pn1Layout);
+        pn1Layout.setHorizontalGroup(
+            pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pn1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(lblGestionarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(175, 175, 175))
+                    .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblIniciarSesion)
+                .addGap(27, 27, 27)
+                .addComponent(lblHazteAnfitrion)
+                .addGap(16, 16, 16))
+        );
+        pn1Layout.setVerticalGroup(
+            pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pn1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pn1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHazteAnfitrion, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblGestionarAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
+        );
+
+        tablaAlojamientos.setBackground(new java.awt.Color(255, 255, 255));
+        tablaAlojamientos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tablaAlojamientos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaAlojamientosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaAlojamientos);
+
+        cbCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+        cbCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCiudadActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(200, 113, 17));
+        jLabel3.setText("Ciudad");
+
+        cbTipoIAlojamiento.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos" }));
+        cbTipoIAlojamiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoIAlojamientoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(200, 113, 17));
+        jLabel2.setText("Tipo de Alojamiento");
+
+        btnBuscar.setFont(new java.awt.Font("Comic Sans MS", 0, 12)); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Comic Sans MS", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(200, 113, 17));
+        jLabel4.setText("Precio");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(160, 160, 160)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cbTipoIAlojamiento, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbCiudad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(153, 153, 153))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(81, 81, 81)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(46, 46, 46))))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoIAlojamiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        btnVerTodos.setText("Ver todos");
+        btnVerTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerTodosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(612, Short.MAX_VALUE)
-                .addComponent(lblHazteAnfitrion, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnVerTodos)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1090, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lblHazteAnfitrion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(598, Short.MAX_VALUE))
+                .addComponent(pn1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(btnVerTodos)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,6 +377,184 @@ public class frmPrincipal extends javax.swing.JFrame {
         lblHazteAnfitrion.setFont(font.deriveFont(attributes));
     }//GEN-LAST:event_lblHazteAnfitrionMouseExited
 
+    private void lblIniciarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIniciarSesionMouseClicked
+        String txt = lblIniciarSesion.getText();
+        if (txt.equalsIgnoreCase("Iniciar sesión")) {
+            frmLogin vista = new frmLogin();
+            vista.setVisible(true);
+            this.dispose();
+        } else {
+            lblIniciarSesion.setText("INICIAR SESIÓN");
+            lblBienvenido.setText(null);
+            correo = "";
+            lblGestionarAdmin.setText(null);
+            lblGestionarAdmin.setCursor(new Cursor(DEFAULT_CURSOR));
+            
+        }
+    }//GEN-LAST:event_lblIniciarSesionMouseClicked
+
+    private void lblIniciarSesionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIniciarSesionMouseEntered
+        Font font = lblIniciarSesion.getFont();
+
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        lblIniciarSesion.setFont(font.deriveFont(attributes));
+    }//GEN-LAST:event_lblIniciarSesionMouseEntered
+
+    private void lblIniciarSesionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblIniciarSesionMouseExited
+        Font font = lblIniciarSesion.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, -1);
+        lblIniciarSesion.setFont(font.deriveFont(attributes));
+    }//GEN-LAST:event_lblIniciarSesionMouseExited
+
+    private void lblGestionarAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionarAdminMouseClicked
+        String txt = lblGestionarAdmin.getText();
+        if (txt.equalsIgnoreCase("Gestionar")) {
+            frmAdmin vista = new frmAdmin();
+            vista.setVisible(true);
+            this.dispose();
+        } else {
+/*
+            frmInmueble vista = new frmInmueble();
+            vista.setVisible(true);
+*/
+        }
+        //this.dispose();
+
+    }//GEN-LAST:event_lblGestionarAdminMouseClicked
+
+    private void lblGestionarAdminMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionarAdminMouseEntered
+        Font font = lblGestionarAdmin.getFont();
+
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        lblGestionarAdmin.setFont(font.deriveFont(attributes));
+    }//GEN-LAST:event_lblGestionarAdminMouseEntered
+
+    private void lblGestionarAdminMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblGestionarAdminMouseExited
+        Font font = lblGestionarAdmin.getFont();
+        Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, -1);
+        lblGestionarAdmin.setFont(font.deriveFont(attributes));
+    }//GEN-LAST:event_lblGestionarAdminMouseExited
+
+    private void lblBienvenidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBienvenidoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblBienvenidoMouseEntered
+
+    private void lblBienvenidoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBienvenidoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblBienvenidoMouseExited
+
+    private void tablaAlojamientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaAlojamientosMouseClicked
+        Alojamiento aloja = new Alojamiento();
+        aloja.setTitulo(tablaAlojamientos.getValueAt(tablaAlojamientos.getSelectedRow(), 0).toString());
+        Alojamiento alojamiento = aloja.buscarPorTitulo();
+        System.out.println(alojamiento.getTitulo());
+        frmDatos.alojamiento = alojamiento;
+        frmDatos vista = new frmDatos();
+        vista.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_tablaAlojamientosMouseClicked
+
+    private void cbCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCiudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCiudadActionPerformed
+
+    private void cbTipoIAlojamientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoIAlojamientoActionPerformed
+
+    }//GEN-LAST:event_cbTipoIAlojamientoActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        System.out.println("hoolaaaaaaaaaa");
+        String tipoAlojamiento = cbTipoIAlojamiento.getSelectedItem().toString();
+        String ciudad = cbCiudad.getSelectedItem().toString();
+        String desde = txtDesde.getText();
+        String hasta = txtHasta.getText();
+        Alojamiento a = new Alojamiento();
+        
+     
+        if (tipoAlojamiento.equalsIgnoreCase("Todos") && ciudad.equalsIgnoreCase("todos") && desde.equalsIgnoreCase("desde") && hasta.equalsIgnoreCase("hasta")) {
+            tablaAlojamientos.setModel(a.listarElementos());
+           
+        } else {
+            if (tipoAlojamiento.equalsIgnoreCase("Todos")) {
+                if (ciudad.equalsIgnoreCase("todos")) {
+                       
+                } else {
+                
+                    tablaAlojamientos.setModel(a.listarPorCiudad(ciudad));
+                    int x = tablaAlojamientos.getRowCount();
+                    if (x == 0) {
+                        imprimir("No hay inmuebles registrados de este tipo");
+                        tablaAlojamientos.setModel(a.listarElementos());
+                        cbTipoIAlojamiento.setSelectedIndex(0);
+                        cbCiudad.setSelectedIndex(0);
+                    } else {
+
+                        tipoAlojamiento = cbTipoIAlojamiento.getSelectedItem().toString();
+                        ciudad = cbCiudad.getSelectedItem().toString();
+
+                        tablaAlojamientos.setModel(a.listarPorCiudad(ciudad));
+
+                    }
+                }
+            } else if (ciudad.equalsIgnoreCase("todos")) {
+                if (tipoAlojamiento.equalsIgnoreCase("Todos")) {
+
+                } else {
+                    tablaAlojamientos.setModel(a.listarPorTipo(tipoAlojamiento));
+                    int x = tablaAlojamientos.getRowCount();
+                    if (x == 0) {
+                        imprimir("No hay inmuebles registrados de este tipo");
+                        tablaAlojamientos.setModel(a.listarElementos());
+                        cbTipoIAlojamiento.setSelectedIndex(0);
+                        cbCiudad.setSelectedIndex(0);
+                    } else {
+
+                        tipoAlojamiento = cbTipoIAlojamiento.getSelectedItem().toString();
+                        ciudad = cbCiudad.getSelectedItem().toString();
+
+                        tablaAlojamientos.setModel(a.listarPorTipo(tipoAlojamiento));
+
+                    }
+                }
+            } else if (ciudad.equalsIgnoreCase("todos")) {
+
+            } else {
+                if (tipoAlojamiento.equalsIgnoreCase("Todos")) {
+
+                } else {
+                    tablaAlojamientos.setModel(a.listarPorTipoYCiudad(tipoAlojamiento, ciudad));
+                    int x = tablaAlojamientos.getRowCount();
+                    if (x == 0) {
+                        imprimir("No hay inmuebles registrados de este tipo");
+                        tablaAlojamientos.setModel(a.listarElementos());
+                        cbTipoIAlojamiento.setSelectedIndex(0);
+                        cbCiudad.setSelectedIndex(0);
+                    } else {
+
+                        tipoAlojamiento = cbTipoIAlojamiento.getSelectedItem().toString();
+                        ciudad = cbCiudad.getSelectedItem().toString();
+
+                        tablaAlojamientos.setModel(a.listarPorTipoYCiudad(tipoAlojamiento, ciudad));
+
+                    }
+                }
+            }
+
+        }
+        cbTipoIAlojamiento.setSelectedIndex(0);
+        cbCiudad.setSelectedIndex(0);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnVerTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerTodosActionPerformed
+        tablaAlojamientos.setModel(alojamiento.listarElementos());
+    }//GEN-LAST:event_btnVerTodosActionPerformed
+    public void imprimir(String a) {
+        JOptionPane.showMessageDialog(null, a);
+    }
     /**
      * @param args the command line arguments
      */
@@ -124,14 +583,28 @@ public class frmPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmPrincipal().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new frmPrincipal().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnVerTodos;
+    private javax.swing.JComboBox<String> cbCiudad;
+    private javax.swing.JComboBox<String> cbTipoIAlojamiento;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblBienvenido;
+    private javax.swing.JLabel lblGestionarAdmin;
     private javax.swing.JLabel lblHazteAnfitrion;
+    private javax.swing.JLabel lblIniciarSesion;
+    private javax.swing.JPanel pn1;
+    private javax.swing.JTable tablaAlojamientos;
+    private javax.swing.JTextField txtDesde;
+    private javax.swing.JTextField txtHasta;
     // End of variables declaration//GEN-END:variables
 }
